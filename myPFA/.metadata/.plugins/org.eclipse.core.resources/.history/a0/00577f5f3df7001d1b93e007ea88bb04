@@ -1,0 +1,39 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Follower;
+import com.example.demo.model.User;
+import com.example.demo.model.Writer;
+import com.example.demo.repository.FollowerRepository;
+
+@Service
+public class FollowerServiceImpl implements FollowerService {
+	 private FollowerRepository followerRepository;
+
+	    public FollowerServiceImpl(FollowerRepository followerRepository) {
+	        this.followerRepository = followerRepository;
+	    }
+
+	    @Override
+	    public List<Follower> findByFollower(User follower) {
+	        return followerRepository.findByFollower(follower);
+	    }
+
+	    @Override
+	    public List<Follower> findByWriter(Writer writer) {
+	        return followerRepository.findByWriter(writer);
+	    }
+
+	    @Override
+	    public Follower save(Follower follow) {
+	        return followerRepository.save(follow);
+	    }
+
+	    @Override
+	    public void delete(Follower follow) {
+	        followerRepository.delete(follow);
+	    }
+}

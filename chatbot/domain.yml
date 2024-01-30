@@ -1,0 +1,73 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - ask_calories
+  - bot_challenge
+  - ask_ingredients
+  - request_meal_planning
+  - allergy
+  - ask_recommendation_dinner
+  - ask_recommendation_lunch
+  - ask_recommendation_breakfast
+  - preference
+  - thankYou
+
+  
+
+responses:
+  utter_greet:
+    - text: "Hey! How can I help you?"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_default: 
+    - text: I'm sorry, I can't understand. Could you please rephrase your message? 
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_ask_allergies:
+    - text: "Do you have any allergies?"
+
+  utter_get_allergies:
+    - text: "Give me the allergy's name."
+  utter_ty:
+    - text: "AnyTime."
+    - text: "You're welcome! If you have any more questions or need assistance with anything else, feel free to ask. I'm here to help!"
+  # utter_ask_preferences:
+  #   - text: "Do you have any preferences?"
+  # utter_set_preferences:
+  #   - text: "What are the preferences?"
+
+actions:
+  - action_get_calories
+  - action_store_allergy
+  - action_get_ingredients
+  - no_allergies
+  - action_recommend_breakfast
+  - action_recommend_dinner
+  - action_recommend_lunch
+  # - action_store_preference
+  
+slots:
+  allergies:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  # preference:
+  #   type: list
+  #   influence_conversation: true
+  #   mappings:
+  #     - type: from_text
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

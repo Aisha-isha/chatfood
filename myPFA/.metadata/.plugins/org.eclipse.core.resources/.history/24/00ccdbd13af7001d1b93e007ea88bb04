@@ -1,0 +1,17 @@
+package com.example.demo.ser11vice;
+
+import java.util.List;
+
+import org.springframework.security.core.user11details.User11DetailsService;
+
+import com.example.demo.model.Book;
+import com.example.demo.model.User11;
+import com.example.demo.web.dto.User11RegistrationDto;
+
+public interface User11Service extends User11DetailsService{
+	User11 save(User11RegistrationDto registationDto)
+;
+	  Long getUser11IdByEmail(String email); 
+	  List<User11> getAllUser11s();
+	 User11 getUser11ById(Long id);
+}

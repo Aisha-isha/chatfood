@@ -1,0 +1,87 @@
+import com.example.demo.Model.Message;
+import com.example.demo.Model.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import jakarta.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+public class ChatController {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private ObjectMapper objectMapper; // Required for JSON serialization/deserialization
+
+    @GetMapping("/")
+    public String chatForm(Model model, HttpSession session) {
+        if (session.getAttribute("userId") != null) {
+            model.addAttribute("message", new Message());
+            return "chat";
+        }
+        return "redirect:/signin";
+    }
+
+    @PostMapping("/chat")
+    public String sendMessage(@ModelAttribute Message message, Model model, HttpSession session) {
+        if (session.getAttribute("userId") != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+            String userId = session.getAttribute("userId").toString();
+
+            // Set the userId in the Message object
+            message.setUserId(Long.parseLong(userId));
+
+            // Send the request to the Rasa chatbot
+            String url = "http://localhost:5005/webhooks/rest/webhook";
+            HttpEntity<Message> requestEntity = new HttpEntity<>(message, headers);
+            ResponseEntity<Response[]> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Response[].class);
+            Response[] responses = responseEntity.getBody();
+
+            // Retrieve the list of user messages from the session
+            List<Message> userMessages = (List<Message>) session.getAttribute("messages");
+            if (userMessages == null) {
+                userMessages = new ArrayList<>();
+            }
+
+            // Add the message sent by the user to the user's list of messages
+            message.setSent(true);
+            userMessages.add(message);
+
+            // Convert each Response into a Message and add them to the user's list of messages
+            for (Response response : responses) {
+                Message responseMessage = new Message();
+                responseMessage.setMessage(response.getText());
+                responseMessage.setSent(false);
+                userMessages.add(responseMessage);
+            }
+
+            // Update the list of user messages in the session
+            session.setAttribute("messages", userMessages);
+
+            // Create a JSON payload for setting the 'userId' slot
+            String actionJson = "{\"name\":\"action_set_user_id\",\"policy\":\"MappingPolicy\",\"confidence\":1.0,\"slots\":{\"userId\":\"" + userId + "\"}}";
+
+            model.addAttribute("message", new Message());
+            model.addAttribute("messages", userMessages);
+            model.addAttribute("actionJson", actionJson); // Add actionJson to the model
+
+            return "chat";
+        }
+
+        return "redirect:/signin";
+    }
+
+}

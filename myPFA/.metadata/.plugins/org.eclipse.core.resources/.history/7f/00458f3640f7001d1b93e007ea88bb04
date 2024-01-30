@@ -1,0 +1,140 @@
+package com.example.demo.model;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@Table(name =  "books")
+public class Book {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")	
+private long id;
+	
+private transient MultipartFile couverture;
+private String couvertureFileName;
+
+@ManyToOne(fetch = FetchType.LAZY, optional = false)
+@JoinColumn(name = "writer_id", nullable = false)
+private Writer writer;
+
+public Writer getWriter() {
+	return writer;
+}
+public void setWriter(Writer writer) {
+	this.writer = writer;
+}
+@Column(name = "titre")	
+private String titre;
+
+
+
+
+@Column(name = "genre")
+private String genre;
+
+@Column(name = "pages")	
+private String pages;
+
+@Column(name = "language")	
+private String language;
+
+@Column(name = "description", columnDefinition = "TEXT")
+@Lob
+private String description;
+
+
+
+
+
+@Column(name = "date_publication")
+private Date date_publication;
+
+
+
+@Column(name = "date_ecriture")	
+private String date_ecriture;
+
+
+
+
+public MultipartFile getCouverture() {
+    return couverture;
+}
+
+public void setCouverture(MultipartFile couverture) {
+    this.couverture = couverture;
+}
+
+public String getCouvertureFileName() {
+    return couvertureFileName;
+}
+
+public void setCouvertureFileName(String couvertureFileName) {
+    this.couvertureFileName = couvertureFileName;
+}
+public String getDate_ecriture() {
+	return date_ecriture;
+}
+public void setDate_ecriture(String date_ecriture) {
+	this.date_ecriture = date_ecriture;
+}
+public Date getDate_publication() {
+	return date_publication;
+}
+public void setDate_publication(Date date_publication) {
+	this.date_publication = date_publication;
+}
+
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
+public String getLanguage() {
+	return language;
+}
+public void setLanguage(String language) {
+	this.language = language;
+}
+public String getPages() {
+	return pages;
+}
+public void setPages(String pages) {
+	this.pages = pages;
+}
+public String getGenre() {
+	return genre;
+}
+public void setGenre(String genre) {
+	this.genre = genre;
+}
+public String getTitre() {
+	return titre;
+}
+public void setTitre(String titre) {
+	this.titre = titre;
+}
+public long getId() {
+	return id;
+}
+public void setId(long id) {
+	this.id = id;
+}
+
+}

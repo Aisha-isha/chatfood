@@ -1,0 +1,80 @@
+package com.example.demo.model;
+
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name="reader")
+public class Reader {
+	
+	@Id
+	@Column(name="reader_id")
+	private long id;
+	
+	@Column(name="nom")
+	private String nom;
+	
+	@Column(name="prenom")
+	private String prenom;
+
+	@Column(name="personal_image")
+	private String personalImage;
+	
+	@OneToOne
+    @MapsId
+    @JoinColumn(name = "reader_id")
+    private User1 user1;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getPersonalImage() {
+		return personalImage;
+	}
+
+	public void setPersonalImage(String personalImage) {
+		this.personalImage = personalImage;
+	}
+
+	public User1 getUser1() {
+		return user1;
+	}
+
+	public void setUser1(User1 user1) {
+		this.user1 = user1;
+	}
+	
+	
+}

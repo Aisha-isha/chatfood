@@ -1,0 +1,130 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: request_meal_planning
+  examples: |
+    - Can you help me with meal planning?
+    - I need assistance with planning my meals.
+    - Do you have any suggestions for meal planning?
+    - Could you provide me with a meal plan?
+    - I'm looking for a weekly meal schedule. Can you help?
+
+# - intent: preference
+#   examples: |
+#     - I prefer eating [*](preference).
+    
+- intent: allergy
+  examples: |
+    - I have allergy from [*](allergy).
+    - I can't eat [*](allergy).
+
+- intent: ask_calories
+  examples: |
+    - How many calories are in a [*](food)?
+    - What's the calorie content of an [*](food)?
+
+- intent: ask_ingredients 
+  examples: |
+    - whitch ingredients are in a [*](meal)?
+    - what are the ingredients in a [*](meal)?
+    - list the ingredients of a [*](meal)
+    - ingredients for [*](meal)
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good bye
+    - see you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: thankYou
+  examples: |
+    - Thank you
+    - ty
+    - Thank's
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - yep
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - nope
+    - I don't think so
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: ask_recommendation_breakfast
+  examples: |
+    - give me some breakfast recommendations 
+    - Can you suggest some breakfast options?
+    - I'm looking for breakfast recommendations. Any ideas?
+    - What are some good breakfast choices?
+    - Could you recommend some breakfast dishes?
+    - I need breakfast suggestions. What do you recommend?
+    - Do you have any breakfast meal ideas?
+    - I'm in search of breakfast inspiration. Can you help?
+    - What are some delicious breakfast meals you suggest?
+    - Any tasty breakfast recommendations?
+    - I'm open to breakfast suggestions. What would you recommend?
+
+- intent: ask_recommendation_lunch
+  examples: |
+    - give me some lunch recommendations 
+    - Can you suggest some lunch options?
+    - I'm looking for lunch recommendations. Any ideas?
+    - What are some good lunch choices?
+    - Could you recommend some lunch dishes?
+    - I need lunch suggestions. What do you recommend?
+    - Do you have any lunch meal ideas?
+    - I'm in search of lunch inspiration. Can you help?
+    - What are some delicious lunch meals you suggest?
+    - Any tasty lunch recommendations?
+    - I'm open to lunch suggestions. What would you recommend?
+
+- intent: ask_recommendation_dinner
+  examples: |
+    - give me some dinner recommendations 
+    - Can you suggest some dinner options?
+    - I'm looking for dinner recommendations. Any ideas?
+    - What are some good dinner choices?
+    - Could you recommend some dinner dishes?
+    - I need dinner suggestions. What do you recommend?
+    - Do you have any dinner meal ideas?
+    - I'm in search of dinner inspiration. Can you help?
+    - What are some delicious dinner meals you suggest?
+    - Any tasty dinner recommendations?
+    - I'm open to dinner suggestions. What would you recommend?

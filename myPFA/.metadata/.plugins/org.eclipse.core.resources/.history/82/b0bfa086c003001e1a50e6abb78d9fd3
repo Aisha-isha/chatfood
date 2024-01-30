@@ -1,0 +1,82 @@
+package com.example.demo.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.demo.Model.Message;
+import com.example.demo.Model.Response;
+
+import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+import java.util.ArrayList;
+
+
+@Controller
+public class ChatController {
+    
+    @Autowired
+    private RestTemplate restTemplate;
+   
+    
+    @GetMapping("/")
+    public String chatForm(Model model,HttpSession session) {
+    	  if (session.getAttribute("userId") != null) {
+        model.addAttribute("message", new Message());
+        return "chat";
+    	  }
+    	  return "redirect:/signin";
+    }
+
+   
+
+    @PostMapping("/chat")
+    public String sendMessage(@ModelAttribute Message message, Model model, HttpSession session) {
+        if (session.getAttribute("userId") != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+            String userId = session.getAttribute("userId").toString();
+
+            // Envoyer la requête au chatbot Rasa
+            String url = "http://localhost:5005/webhooks/rest/webhook?userId=" + userId;
+            HttpEntity<Message> requestEntity = new HttpEntity<>(message, headers);
+            ResponseEntity<Response[]> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Response[].class);
+            Response[] responses = responseEntity.getBody();
+
+            // Récupérer la liste des messages de l'utilisateur actuel depuis la session
+            List<Message> userMessages = (List<Message>) session.getAttribute("messages");
+            if (userMessages == null) {
+                userMessages = new ArrayList<>();
+            }
+
+            // Ajouter le message envoyé par l'utilisateur à la liste de l'utilisateur
+            message.setSent(true); // Le message est envoyé
+            userMessages.add(message);
+
+            // Convertir chaque Response en Message et les ajouter à la liste de l'utilisateur
+            for (Response response : responses) {
+                Message responseMessage = new Message();
+                responseMessage.setMessage(response.getText());
+                responseMessage.setSent(false); // Le message est reçu
+                userMessages.add(responseMessage);
+            }
+
+            // Mettre à jour la liste de messages de l'utilisateur dans la session
+            session.setAttribute("messages", userMessages);
+
+            model.addAttribute("message", new Message());
+            model.addAttribute("messages", userMessages);
+            return "chat";
+        }
+
+        return "redirect:/signin";
+    }
+
+}

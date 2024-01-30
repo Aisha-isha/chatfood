@@ -1,0 +1,15 @@
+package com.example.demo.repository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.Follower;
+import com.example.demo.model.User;
+import com.example.demo.model.Writer;
+
+@Repository
+public interface FollowerRepository extends JpaRepository<Follower, Long>{
+	List<Follower> findByFollower(User follower);
+    List<Follower> findByWriter(Writer writer);
+}

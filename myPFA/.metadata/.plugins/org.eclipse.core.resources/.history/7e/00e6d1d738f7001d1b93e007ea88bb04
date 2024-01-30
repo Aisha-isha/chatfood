@@ -1,0 +1,144 @@
+package com.example.demo.model;
+import java.text.SimpleDateFormat;
+import java.util.Set;
+
+import org.springframework.data.annotation.Transient;
+import com.example.demo.model.Follower;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+@Entity
+@Table(name="writer")
+public class Writer {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "writer_id")
+    private long id;
+	
+	@Column(name="nom")
+	private String nom;
+	
+	@Column(name="prenom")
+	private String prenom;
+	
+	/*String pattern="yyyy-MM-dd";*/
+	
+	@Column(name="date_of_birth")
+	private String dateOfBirth;
+	/*private SimpleDateFormat dateOfBirth=new SimpleDateFormat(pattern);*/
+	
+	@Column(name="region_of_living")
+	private String regionOfLiving;
+	
+	@Column(name="phone")
+	private String phone;
+	
+	@Column(name="Bio")
+	private String bio;
+	
+	
+	 
+	public User getUserW() {
+		return userW;
+	}
+	public void setUserW(User user) {
+		this.userW = user;
+	}
+	
+	
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "writer_id")
+	private User userW;
+
+	
+	
+	
+	@Column(name="personal_image")
+	private String personalImage;
+	
+	@OneToMany(mappedBy = "writer", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Book> book;
+	
+
+
+	@OneToMany(mappedBy = "writer")
+    private List<Follower> followers = new ArrayList<>();
+	
+	public List<Follower> getFollowers() {
+		return followers;
+	}
+	public void setFollowers(List<Follower> followers) {
+		this.followers = followers;
+	}
+	public Set<Book> getBook() {
+		return book;
+	}
+	public void setBook(Set<Book> book) {
+		this.book = book;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id= id;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public String getRegionOfLiving() {
+		return regionOfLiving;
+	}
+	public void setRegionOfLiving(String regionOfLiving) {
+		this.regionOfLiving = regionOfLiving;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getBio() {
+		return bio;
+	}
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+	public String getPersonalImage() {
+		return personalImage;
+	}
+	public void setPersonalImage(String personalImage) {
+		this.personalImage = personalImage;
+	}
+}

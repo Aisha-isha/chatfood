@@ -1,0 +1,31 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohPT8/JakytbY2FgAh+hxX": "utter_goodbye",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohPT8/JakytZaAKaUlJalF8TDFuE2JBQCMqTcN": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB1flJqcn5ubmpeSCFFampecUVsbCwBAqiNa": "action_recommend_lunch",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB1flJqcn5ubmpeSCFFampecUUucsXCtUF0kmB8LAHMfSKc=": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB2fnJiTX5SZWlxbGwsAtJMeXg==": "action_get_calories",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB2fnJiTX5SZWlxLnFHpqSUILQQMjAUAOTM9bQ==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB2fmZdelJqSCeQX19bGAgASTB+o": "action_get_ingredients",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB2fmZdelJqSCeQX1xJnWnpqCYouwsbGAgCFrkFL": "action_listen",
+    "eJwtytsJgDAMRuFVMoATdBWRECRIoP3tJfWldHcL+nY+OPuYG41c9WE53W4EGl8wJGmgH9GaK9bbm9b1GBY9UNXStTknlcg5CmC45jxe2fciKw==": "utter_ask_allergies",
+    "eJyNjFEKg0AMBa+yB+gJ9ipSQpCHhMaoSdafxbt3Qf/bvxkYZurXq/TdcRLPKZvV0m8g4xW1PKISCRttC/hoxIZmLY6jIZJWsNKubCa2XD+eLRNOHB9iVfgiiL/P7y/4Y0Ui": "action_listen",
+    "eJytjkEKAjEMRa/SA3iCXkUkBPkzBNM4Jqmb0rtb0P1s3P0Hj8e/jnkp43C8ie8pT6tlfAcZN9TyA5VI2HJ7wJcjtjBrcbw6IqmBlQ5lM7F9njR7Jpw4HsSq8F0QfyqfvOVtE29z3j4oCV9U": "utter_get_allergies",
+    "eJytjkEKAjEMRa/SA3iCXkUkBPlTgmkc09RNmbtbULczLtz9B5/HO4/tlMbqeBJfQ+6W03gPMq7I6QMqLWDz2xt8fsQmRk6OR0cLqmClVdlMrGwHzh4BJ243YlV4EbQ/mQ9qeVnE6295BbGX91VdXlFZfAQ=": "action_listen",
+    "eJytjkEKAjEQBL+SB/iCfEVkGKQ3DCbjOpkIEvJ3g3re3YO3LmiKOvdxCn01PImvLneNoX8HKRfE8IMs1aHz2ypsfkQnegyGR0N1KuBMa2ZV0TR2nM0dRlxvxDnDkqD+ybxTy8siVo7lJfhW3jHVXs/H/xrj8gbjqpax": "action_store_allergy",
+    "eJytjl0KAjEMhK/SA3iCXkUkBMmWYJtdk1SQsne3+POo7YNvMzDz8R3bfghtU7oBnp1XiaG9AggWiuFdMpuT9G010r5h6dVjULpWModCmGHLKMKS9gGzupMC2gUwZ9LEZH8iD2xxWVjLnF4i/6U3hxr5PPn3SYr5qgSfz3fY6QGvPbRL": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohqSg1MTstsbgkvig1OT83NzUvJRGkobY2FgA/1iNV": "action_ask_preferences",
+    "eJyVjMENgCAQBFuhACugFWPIiUtClMPcoR9C72K0AP3tJLMz1jaYugtOR77EzNbUZzimBGte2KIWcHcPhXQncsdizSygNZAWJ/A5JfBC96F9y5KurlsBAvbQP/3pAm64SJo=": "action_listen",
+    "eJytjkEKwzAMBL+iB+QF/koIRnU3IFIrwVJ7Mf57HdpA21MPuWlhNLtjbQPVreARObmsGqi+jqicEegdbmIO7ezdUDoj2qMHuhTwMrN5LEhrztAr7w/tPy3bEjs1o0AT7HT/7+zuFBdYoPGjdhro6Nu5r0VtegL6+3Bc": "action_recommend_breakfast",
+    "eJytjlEKwkAMRK+SA/QEe5VSlrhOYambSrL6s/TupmiL+lXQvwxM5r2+LR21q+IeOdU8S6D2PKJwQaBXuGSrEO/eDOqdLB5roJOCp5GtRkWaS4GceX1Yjs2yTdFbIxSSYH/f/9b2zVwzLFD/hh062nhr78PoGGeXi7vwT9DhAZ4mnVs=": "action_listen",
+    "eJytjkEKwzAMBL/iB/QF/kooQjRLEFXUVJILxfjvNbT3XHrbgWHYpY9L6YfjRXxLeVgt/TvIeEctP1CJhE23BXw6YhOzFsezIZJ2sNKhbCa2jZNmy4QTx51YFb4J4k/lk7cr7D3G9QNqR16P": "no_allergies",
+    "eJytjkEKwzAMBL/iB/QF/koIQrRLEHWUVJILxeTvNaTn+NLbDgzDTu24pbYb3sT3kE1zaucg5RU5/aCIB7S71WHdEe0YORleFR60ggvthVVFl2PQrBEwYn8SlwJbBP6n8uDtA/oZJXS7enUW5i8JlHeE": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpbhMiAUAQvc0lw==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohKb8kPjkjMScnNS89tbY2FgDS8h61": "utter_iamabot",
+    "eJyFjEEKgDAMBL+SB/iCfkUkxBI0UFNpUy+lfzeg9952YHbWPhbod+EHKZpkDdC/gUoXB/ghSTVWd1vl4o6oowXYs2E8KSXWg8ek1cy4oNBFfpu2thdA+Tu9": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB1flJqcn5ubmpeSCFaakpmXl1pUWxsLAGQAI8A=": "action_recommend_dinner",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3BChdnB1flJqcn5ubmpeSCFaakpmXl1pUS5y5cL0wbaTYEAsAT8NJ2Q==": "action_listen"
+  }
+}

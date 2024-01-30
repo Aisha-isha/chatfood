@@ -1,0 +1,147 @@
+package com.example.demo.service;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Blog;
+import com.example.demo.model.Book;
+import com.example.demo.model.Role;
+import com.example.demo.model.User;
+import com.example.demo.model.Reader;
+import com.example.demo.model.Writer;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.ReaderRepository;
+import com.example.demo.web.dto.UserRegistrationDto;
+import com.example.demo.repository.WriterRepository;
+@Service
+public class UserServiceImpl implements UserService{
+
+	private UserRepository userRepository;
+	@Autowired
+	private WriterRepository writerRepository;
+	@Autowired
+	private ReaderRepository readerRepository;
+	@Autowired
+	@Lazy
+	private BCryptPasswordEncoder passwordEncoder;
+	
+
+	
+	
+	public UserServiceImpl(UserRepository userRepository) {
+		super();
+		this.userRepository = userRepository;
+	}
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+
+
+	@Override
+	public User save(UserRegistrationDto registrationDto) {
+	    User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(), passwordEncoder.encode(registrationDto.getPassword()), registrationDto.getRole(), Arrays.asList(new Role("ROLE_USER")),registrationDto.getResetPasswordToken());
+
+	    user = userRepository.save(user); 
+
+	    if (registrationDto.getRole().equals("author")) {
+	        Writer writer = new Writer();
+	        writer.setUserW(user); 
+	        writerRepository.save(writer);
+	    }
+
+	    if (registrationDto.getRole().equals("reader")) {
+	        Reader reader = new Reader();
+	        reader.setUser(user); 
+	        readerRepository.save(reader);
+	    }
+
+	    
+	    
+	    
+	    return user;
+	}
+	
+	public void updateResetPasswordToken(String token, String email) throws UsernameNotFoundException {
+		User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        } else {
+            throw new UsernameNotFoundException("Could not find any user with the email " + email);
+        }
+    }
+	public User getByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+	public void updatePassword(User user, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+         
+        user.setResetPasswordToken(null);
+        userRepository.save(user);
+    }
+
+
+
+
+
+
+	
+		
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByEmail(username);
+		System.out.println(user);
+		if(user == null) {
+			System.out.println("bad");
+			throw new UsernameNotFoundException("Invalid username or password");
+		} 
+		System.out.println("good");
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+	}
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		
+		
+	}
+	
+	
+	
+	    
+	    @Override
+	    public Long getUserIdByEmail(String email) {
+	        User user = userRepository.findByEmail(email);
+	        if (user != null) {
+	            return user.getId();
+	        }
+	        return null; 
+	    }
+	    
+	    
+	
+	public User getUserById(Long Id) {
+	    List<User> users = getAllUsers();
+for (User user : users) {
+	 if (user.getId() == Id){
+	        return user;
+	    }
+}
+return null; 
+}
+
+}

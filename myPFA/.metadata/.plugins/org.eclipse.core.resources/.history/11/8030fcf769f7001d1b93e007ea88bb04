@@ -1,0 +1,21 @@
+# MongoDB Atlas Connection
+spring.data.mongodb.uri=mongodb+srv://Readme:READMEJEE@cluster0.qqsd1mk.mongodb.net/readme?retryWrites=true&w=majority
+
+spring.data.mongodb.database=readme
+
+
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type=TRACE
+spring.servlet.multipart.enabled=true
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+server.port=8082
+spring.mail.host=smtp.gmail.com
+spring.mail.username=kathfbr1123@gmail.com
+spring.mail.password=sovauwsptyelkaku
+spring.mail.port=587
+spring.mail.properties.mail.transport.protocol=smtp
+spring.mail.properties.stmp.auth=true
+spring.mail.properties.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.main.allow-bean-definition-overriding=true

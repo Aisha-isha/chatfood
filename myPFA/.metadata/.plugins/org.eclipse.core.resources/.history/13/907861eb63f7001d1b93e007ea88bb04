@@ -1,0 +1,27 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.example.demo.model.User1;
+import com.example.demo.web.dto.UserRegistrationDto;
+
+public interface UserService extends UserDetailsService {
+	User1 save(UserRegistrationDto registrationDto);
+
+	Long getUserIdByEmail(String email);
+
+	List<User1> getAllUsers();
+
+	User1 getUserById(Long id);
+
+	void updateResetPasswordToken(String token, String email) throws UsernameNotFoundException;
+
+	User1 getByResetPasswordToken(String token);
+
+	void updatePassword(User1 user1, String newPassword);
+
+	Long getUser1IdByEmail(String email);
+}

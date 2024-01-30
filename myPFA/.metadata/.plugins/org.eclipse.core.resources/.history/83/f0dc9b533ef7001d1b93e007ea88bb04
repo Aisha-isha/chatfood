@@ -1,0 +1,61 @@
+package com.example.demo.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.model.Book;
+import com.example.demo.model.User;
+import com.example.demo.service.BookService;
+import com.example.demo.service.UserService;
+
+
+
+
+
+@Controller
+public class Book_detailController {
+	
+
+	@Autowired
+	private BookService bookService;
+	@Autowired
+	private UserService userService;
+
+	
+	@GetMapping("/detail")
+	public String viewBookDetail(Model model, @RequestParam("bookId") String bookId) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication.isAuthenticated()) {
+	        Object principal = authentication.getPrincipal();
+	        if (principal instanceof UserDetails) {
+	            UserDetails userDetails = (UserDetails) principal;
+	            Long userId = userService.getUserIdByEmail(userDetails.getUsername());
+	            User user = userService.getUserById(userId);
+	             String role=user.getRole();
+	            model.addAttribute("user", user);
+	    Book book = bookService.getBookById(bookId);
+	    model.addAttribute("book", book);
+	    model.addAttribute("role", role);
+	    model.addAttribute("logoutUrl", "/logout");
+	    if(!"author".equals(role)) {
+			return "redirect:/registration";
+		}
+		else {
+			return "Writer/detail";
+		}
+			
+    } else {
+        
+    }
+}
+
+return "redirect:/login";
+
+
+}
+}

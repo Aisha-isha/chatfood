@@ -1,0 +1,15 @@
+{
+  "lookup": {
+    "eJyLri7OyS8ptlKoLk/MLMnMS49Pyy+KT8zJSS1Kz0wFikcb6hnoKBjoGcTW1sYCAJ5fEGM=": "action_listen",
+    "eJyNjNEJwzAMRFfRACa4v14lBOM0qhG4UrDVhmK8ewTJAP27O967ubci2gL0I5ES5/iSGlMpWDOh7fNj8g785JcxHPS94jemp5KwOVeInN4Y4C6FmiIb+/+xg0/DaiixqRogi2zrD8dYTmg0Ogc=": "utter_goodbye",
+    "eJytjcEKAjEMRH8lH1CWeu2vLEupGkugJpJmFSn77xtQz3rwNjO8mZlHb2I9wXgUMuKaL6K5tIZaCT2fD1MMEKe4bFuAcVO853IyEvbOS2QuV0zwNo26ITv7+3CAtaM6SuxVS1BFzscnfntczVDzB/7P47IDw/9juw==": "action_listen",
+    "eJyNjEEKwzAMBL+iB5jgXP2VEIQbFFfgyMFW2oPx36PSPqC33WVml95y0RagvyMrS8K9VIw5U01Mti/z5B34ya9jOOhnpRfGTbmIOd+AEg8K8CuZm5IY+/+xg6tRNZTFVA3wKIrb8wNLojHWG8tbPGU=": "utter_iamabot",
+    "eJytjUEOwjAMBL/iB0RVuOYrVWWZygRLqYMSFw5R/44R3OHAbb2a8c6jl2o9wXiQmGjGS21IpXDLwt7PpykGiFNcjiPAuDW+I60mVd15B1TaOMHnKNKN1dnfHwfYOzdHRV21BOdquF5fsGb+trubcUOhjVz76+7yBJy5aGs=": "action_listen",
+    "eJyNjEEKwzAMBL+iB5jgXv2VEIQoahAocmor7cH47xW0D+htd5nZdXSt3guMN4mL7fioDUmV2y4c+3pbcoK85G3OBONs/EK6u1QL5xvQ6OACv6LSnS3Y/48TXJ1boGKheoHGz4u748GkeCqZxcGc2we/7z/b": "utter_ask_allergies",
+    "eJy1jsEKAjEMRH8lH1CWeu2vLEsIEpdiN12bVA9l/92Agke9eJsMM/MyDy3VNMF4ULYsK15qQyqF25rZ/fk0xQBxistxBBh74zvS2XIV77wECm2c4H2UrMbi2d+HA3Tl5tEsXrUEjW+d1XBjKrgXEvGBb/xuxk7Q64fyly+WJ16ScdA=": "action_listen",
+    "eJzFkEEKAjEMRa/SA5ShbnuVYShB0iHYpmOb6qL07gYUXOpCcJeE///7ZB0tFWnejDuQEO8hlhogJaw7od7X0+KscYvb5rRmHBVvAc5ChdXzHAJDRm9eS6ImyKr9Ptia3rCqlFit4k3Fa8cmISOkcCRg1oBP/C6CSmiXN+UPLX74BYiRap5zewDxnJsA": "action_store_allergies",
+    "eJzFkEEKg0AMRa8yBxCxW68iMoSSkdAxY5NMuxDv3oAtXdaF0F0S/v8vybBqLqZ9WJ9ARjzFVCRCzigToc+HS9s1oWu7cduasC6CjwhXo8Lu2YvIMGMf3k0mNWTXHg9uQlUUlxK71fogeK+oFmeEHJcMzB7wi1/N0Al6+1L+sMWJX4CUSOaDQLUieNblH/L4AtIex+U=": "action_listen",
+    "eJyNjFEKxCAMRK+SA4jYX68iRaRkJWBjiWn3Q7z7BnYPsH8zw3uT5mhdR4T5LqTENb+65NIaSiW0PW0+OAg+7Gs5mJfgk8uh1Nmcb8hcTozwK42GIhv7/7GDe6AYSmyqRqiCqGvtH/S2OTU=": "utter_greet",
+    "eJytjcEKwzAMQ3/FHxBKds2vlGLCcIMhc4bjbofQf6+hu7eH3STxJM2j12Y9wfhmNpaCa1PMtZIWJs/nxxQDxCku+x5gvJU+mJ/GTbxzCpT8ogQ/U7kbibP3hwNsndRRFq9agqJEdvW3mZHiif7jbTkAYfJhRQ==": "action_listen"
+  }
+}

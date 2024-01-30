@@ -1,0 +1,10 @@
+package com.goodreads.demo.controllers;
+
+public class PagesController {
+
+	@GetMapping("/")
+	@ResponseBody
+	public String Home() {
+		return"index";
+	}
+}

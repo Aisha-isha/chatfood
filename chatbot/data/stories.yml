@@ -1,0 +1,84 @@
+version: "3.1"
+
+stories:
+- story: greet user
+  steps:
+  - intent: greet
+  - action: utter_greet
+- story: ty
+  steps:
+  - intent: thankYou
+  - action: utter_ty
+
+- story: goodbye user
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: User asks for meal planning and has allergies
+  steps:
+  - intent: request_meal_planning
+  - action: utter_ask_allergies
+  - intent: affirm
+  - action: utter_get_allergies
+  - intent: allergy
+  - action: action_store_allergy
+
+
+- story: bot_challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+
+- story: calories
+  steps:
+  - intent: ask_calories
+  - action: action_get_calories
+
+- story: ingredients
+  steps:
+  - intent: ask_ingredients
+  - action: action_get_ingredients
+
+
+- story: User asks for meal planning and has no allergies
+  steps:
+  - intent: request_meal_planning
+  - action: utter_ask_allergies
+  - intent: deny
+  - action: no_allergies
+
+
+- story: ask for breakfast recommendations with
+  steps:
+  - intent: ask_recommendation_breakfast
+  - action: action_recommend_breakfast
+
+- story: ask for lunch recommendations
+  steps:
+  - intent: ask_recommendation_lunch
+  - action: action_recommend_lunch
+
+- story: ask for dinner recommendations
+  steps:
+  - intent: ask_recommendation_dinner
+  - action: action_recommend_dinner
+
+# - story: Breakfast recommendation with user preferences
+#   steps:
+#     - intent: ask_recommendation_breakfast
+#     - action: utter_ask_preferences
+#     - intent: affirm
+#     - action: utter_set_preferences
+#     - intent: preference
+#     - action: action_store_preference
+    
+- story: User asks for meal planning and has allergies
+  steps:
+  - intent: request_meal_planning
+  - action: utter_ask_allergies
+  - intent: affirm
+  - action: utter_get_allergies
+  - intent: allergy
+  - action: action_store_allergy

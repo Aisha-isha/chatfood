@@ -1,0 +1,94 @@
+package com.example.demo.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.demo.Model.Message;
+import com.example.demo.Model.Response;
+
+import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+import java.util.ArrayList;
+import com.rasa.sdk.Action;
+import com.rasa.sdk.events.SlotSet;
+
+
+@Controller
+public class ChatController {
+    
+    @Autowired
+    private RestTemplate restTemplate;
+   
+    
+    @GetMapping("/")
+    public String chatForm(Model model,HttpSession session) {
+    	  if (session.getAttribute("userId") != null) {
+        model.addAttribute("message", new Message());
+        return "chat";
+    	  }
+    	  return "redirect:/signin";
+    }
+
+   
+    @PostMapping("/chat")
+    public String sendMessage(@ModelAttribute Message message, Model model, HttpSession session) {
+        if (session.getAttribute("userId") != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+            String userId = session.getAttribute("userId").toString();
+
+            // Set the userId in the Message object
+            message.setUserId(Long.parseLong(userId));
+
+            // Send the request to the Rasa chatbot
+            String url = "http://localhost:5005/webhooks/rest/webhook";
+            HttpEntity<Message> requestEntity = new HttpEntity<>(message, headers);
+            ResponseEntity<Response[]> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Response[].class);
+            Response[] responses = responseEntity.getBody();
+
+            // Retrieve the list of user messages from the session
+            List<Message> userMessages = (List<Message>) session.getAttribute("messages");
+            if (userMessages == null) {
+                userMessages = new ArrayList<>();
+            }
+
+            // Add the message sent by the user to the user's list of messages
+            message.setSent(true);
+            userMessages.add(message);
+
+            // Convert each Response into a Message and add them to the user's list of messages
+            for (Response response : responses) {
+                Message responseMessage = new Message();
+                responseMessage.setMessage(response.getText());
+                responseMessage.setSent(false);
+                userMessages.add(responseMessage);
+            }
+
+            // Update the list of user messages in the session
+            session.setAttribute("messages", userMessages);
+
+            // Set the 'userId' slot in Rasa
+            SlotSet userIdSlot = new SlotSet("userId", userId);
+            List<SlotSet> events = List.of(userIdSlot);
+
+            model.addAttribute("message", new Message());
+            model.addAttribute("messages", userMessages);
+            model.addAttribute("events", events); // Add events to the model
+
+            return "chat";
+        }
+
+        return "redirect:/signin";
+    }
+
+
+
+}

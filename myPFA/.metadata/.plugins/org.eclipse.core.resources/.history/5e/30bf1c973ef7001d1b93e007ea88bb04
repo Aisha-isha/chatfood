@@ -1,0 +1,77 @@
+package com.example.demo.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.service.WriterService;
+import com.example.demo.service.FollowerService;
+import com.example.demo.model.Book;
+import com.example.demo.model.Follower;
+import com.example.demo.model.User;
+import com.example.demo.model.Writer;
+import com.example.demo.repository.BookRepository;
+import com.example.demo.repository.FollowerRepository;
+import com.example.demo.repository.UserRepository;
+
+@Controller
+public class FollowerController {
+
+	@Autowired
+	private WriterService writerService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private FollowerService followerService;
+	
+	@Autowired
+	private BookRepository bookRepository;
+	
+	@Autowired
+	private FollowerRepository followerRepository;
+	
+	@GetMapping("/seeWriterProfile/{idCurrentUser}/{idWriter}")
+	public String seeProfile(@PathVariable(value="idCurrentUser") long idCurrentUser,@PathVariable(value="idWriter") long idWriter,Model model) {
+		Writer writer=writerService.getWriterById(idWriter);
+		model.addAttribute("writer",writer);
+		Optional<User> opt=userRepository.findById(idCurrentUser);
+		User user=opt.get();
+		model.addAttribute("currentUser",idCurrentUser);
+		List<Book> books=bookRepository.findByWriterId(idWriter);
+		//System.out.print(books.size());
+		model.addAttribute("size",books.size());
+		List<Follower> followers=followerService.findByWriter(writer);
+		model.addAttribute("folowers",followers.size());
+		
+		//Follower follower=new Follower(writer,user);
+		//model.addAttribute("follow",follower);
+		List<Follower> followed=followerRepository.findByFollower(user);
+		boolean isFollowing = followed.stream().filter(o -> o.getWriter()==writer).findFirst().isPresent();
+		int following=0;
+		if(isFollowing) {
+			following=1;
+		}
+		model.addAttribute("following",following);
+		return "follow";
+	}
+	
+	@PostMapping("/follow")
+	public String follow(@RequestParam("followerId") Long followerId, @RequestParam("writerId") Long writerId) {
+		Optional<User> opt=userRepository.findById(followerId);
+		User user=opt.get();
+		User follower = user;
+		Writer writer = writerService.getWriterById(writerId);
+		Follower follow = new Follower(writer,follower);
+	    followerService.save(follow);
+	    return "redirect:/seeWriterProfile/" +followerId+"/"+writerId;
+	}
+}

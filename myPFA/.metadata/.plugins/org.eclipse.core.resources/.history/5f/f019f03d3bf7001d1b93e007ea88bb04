@@ -1,0 +1,40 @@
+package com.example.demo.web;
+
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.ser11vice.User11Service;
+import com.example.demo.web.dto.User11RegistrationDto;
+
+@Controller
+@RequestMapping("/registration")
+public class UserRegistrationController {
+	
+	private User1Service user11Service;
+
+	public UserRegistrationController(User1Service user11Service) {
+		super();
+		this.user1Service = user11Service;
+	}
+	
+	@ModelAttribute("user11")
+	public UserRegistrationDto user11RegistrationDto() {
+		return new UserRegistrationDto();
+	}
+	
+	@GetMapping
+	public String showRegistrationForm() {
+		return "registration";
+	}
+	
+	@PostMapping
+	public String registerUser11Account(@ModelAttribute("user11") UserRegistrationDto registrationDto) {
+		userService.save(registrationDto);
+		return "redirect:/login";
+	}
+
+}

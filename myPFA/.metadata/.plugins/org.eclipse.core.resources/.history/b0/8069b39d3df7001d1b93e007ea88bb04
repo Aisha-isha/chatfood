@@ -1,0 +1,58 @@
+package com.example.demo.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.user11details.User11Details;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.model.Blog;
+import com.example.demo.model.User11;
+import com.example.demo.model.Writer;
+import com.example.demo.ser11vice.BlogService;
+import com.example.demo.ser11vice.User11Service;
+
+
+
+
+
+
+@Controller
+public class BlogDController {
+	
+
+	@Autowired
+	private BlogService blogService;
+	 @Autowired
+	    private User11Service user11Service;
+
+	
+	@GetMapping("/blog")
+	public String viewblogDetail(Model model, @RequestParam("id") String id) {
+		Blog blog = blogService.getBlogById(id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication.isAuthenticated()) {
+	        Object principal = authentication.getPrincipal();
+	        if (principal instanceof User11Details) {
+	            User11Details user11Details = (User11Details) principal;
+	            Long user11Id = user11Service.getUser11IdByEmail(user11Details.getUser11name());
+	            User11 user11 = user11Service.getUser11ById(user11Id);
+	             String role=user11.getRole();
+	            model.addAttribute("user11", user11);
+	            model.addAttribute("role", role);
+	            model.addAttribute("logoutUrl", "/logout");
+	          
+	            
+	        	 
+	}
+	    }
+	    Writer writer = blog.getWriter();
+        User11 user112 = writer.getUser11();
+      String fullName = user112.getFirsName() + " " + user112.getLastName();
+	    model.addAttribute("fullName", fullName);
+	    model.addAttribute("blog", blog);
+	    return "detail_blog";
+}
+}

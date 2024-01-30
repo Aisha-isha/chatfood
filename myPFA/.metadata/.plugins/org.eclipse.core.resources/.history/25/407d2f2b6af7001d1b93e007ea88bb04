@@ -1,0 +1,17 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.User1;
+
+@Repository
+public interface UserRepository extends JpaRepository<User1, Long> {
+    User1 findByEmail(String email);
+
+    @Query(value = "SELECT * FROM user1 u WHERE u.id = ?1", nativeQuery = true)
+    User1 findUser1ById(long id);
+
+    User1 findByResetPasswordToken(String token);
+}

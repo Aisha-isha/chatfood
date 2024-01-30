@@ -1,0 +1,45 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.model.Blog;
+import com.example.demo.model.Book;
+import com.example.demo.repository.BlogRepository;
+import com.example.demo.repository.BookRepository;
+
+
+@Controller
+public class LivresController {
+    
+	@Autowired
+    private BlogRepository blogRepository;
+	@Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping("/livres")
+    public String getAllBlogs(Model model) {
+        List<Blog> blogs = blogRepository.findAll();
+        List<Book> books = bookRepository.findAll();
+        model.addAttribute("blogs", blogs);
+        model.addAttribute("books", books);
+        return "livre";
+    }
+
+    @GetMapping("/livres/{id}")
+    public String getBookById(@PathVariable Long id, Model model) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        model.addAttribute("book", book);
+        return "detail_livre";
+    }
+
+}
+
+
+
+
